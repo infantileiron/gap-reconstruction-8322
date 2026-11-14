@@ -3,3 +3,11 @@ MAX_STATIONS=8
 MAX_MASK_POINTS=48
 MIN_TIME_STEP_HOURS=1e-6
 INTERVAL_Z=1.959963984540054
+# 时段累计复核：五千点长缺口反复查询时，单次计算额外内存硬上限64MB，超限拒绝且保留已有结果
+EXPOSURE_MEMORY_LIMIT_BYTES=64*1024*1024
+# 预估值留4MB余量，避免tracemalloc/临时对象使真实峰值越过硬上限
+EXPOSURE_MEMORY_SAFETY_BYTES=4*1024*1024
+# 每个运行最多保留的累计复核结果（按最早创建顺序淘汰，反复查询不无限增长）
+EXPOSURE_REVIEW_LIMIT=20
+# 单次累计复核最多划分的时段数，约束协方差矩阵规模
+EXPOSURE_MAX_PERIODS=128

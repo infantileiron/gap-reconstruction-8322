@@ -37,3 +37,7 @@ class ReportInput(InputModel):
  run_id:str
  review_id:str
  title:str=Field(min_length=2,max_length=100)
+class ExposureReviewInput(InputModel):
+ # 时段边界（小时），至少2个形成1个时段；边界可落在观测之间，按实际时间分段线性积分
+ periods:list[float]=Field(min_length=2,max_length=129)
+ mode:Literal['production','validation']='production'
